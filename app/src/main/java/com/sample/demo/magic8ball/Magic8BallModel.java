@@ -1,6 +1,8 @@
 package com.sample.demo.magic8ball;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,6 +13,10 @@ public class Magic8BallModel extends Object {
 
     private ArrayList<String>initialResponseArray;
     private ArrayList<String>responseArray;
+
+
+    private String description;
+    private String debugDescription;
 
     Magic8BallModel()
     {
@@ -28,7 +34,6 @@ public class Magic8BallModel extends Object {
 
         responseArray.addAll(initialResponseArray);
 
-
     }
 
     Magic8BallModel(ArrayList<String>extraResponse)
@@ -43,6 +48,13 @@ public class Magic8BallModel extends Object {
         initialResponseArray.add("Don't ask me");
         initialResponseArray.add("No idea");
 
+        StringBuffer sb = new StringBuffer();
+
+        sb.append(Character.toChars(127467));
+        sb.append(Character.toChars(127479));
+
+        System.out.print(sb);
+
         initialResponseArray.addAll(extraResponse);
 
         responseArray = new ArrayList<>();
@@ -53,13 +65,54 @@ public class Magic8BallModel extends Object {
 
     public void askQuestion(String question)
     {
-        System.out.println(question);
+        Log.d("MainActivity",question);
+
+        //System.out.println(question);
 
         Random rand = new Random();
 
         int n = rand.nextInt(responseArray.size());
 
-        System.out.println(responseArray.get(n));
+        //System.out.println(responseArray.get(n));
+
+        Log.d("MainActivity", responseArray.get(n));
+
     }
+
+    public void print()
+    {
+        description = "";
+
+        for(int i=0; i<responseArray.size(); i++)
+        {
+            description += responseArray.get(i);
+        }
+
+        Log.d("MainActivity", description);
+
+    }
+
+    public void debugprint()
+    {
+        debugDescription = "Debug: ";
+
+        for(int i=0; i<responseArray.size(); i++)
+        {
+            debugDescription += responseArray.get(i);
+        }
+
+        Log.d("MainActivity", debugDescription);
+    }
+
+    public String response()
+    {
+
+        Random rand = new Random();
+
+        int n = rand.nextInt(responseArray.size());
+
+        return responseArray.get(n);
+    }
+
 
 }

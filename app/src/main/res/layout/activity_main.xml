@@ -7,10 +7,61 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sample.demo.magic8ball.MainActivity">
+    tools:context="com.sample.demo.magic8ball.MainActivity"
+    android:background="#FFF9FB">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:imeOptions="actionDone"
+        android:id="@+id/questionText"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:singleLine="true"
+        android:imeActionLabel="Done"
+        android:selectAllOnFocus="true"
+        android:hint="Ask question"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/circleImg"
+        android:minHeight="30dp"
+        android:minWidth="30dp"
+        android:scaleType="fitCenter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/questionText"
+        android:layout_alignRight="@+id/questionText"
+        android:layout_alignEnd="@+id/questionText"
+        android:layout_above="@+id/shakeBtn"
+        android:src="@drawable/circle1" />
+
+    <Button
+        android:layout_width="356dp"
+        android:layout_height="45dp"
+        android:text="Shake"
+        android:id="@+id/shakeBtn"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shakebutton"
+        android:textSize="30dp"
+        android:layout_alignRight="@+id/circleImg"
+        android:layout_alignEnd="@+id/circleImg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Hello World"
+        android:id="@+id/Response"
+        android:textColor="#fffefe"
+        android:textSize="30dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
