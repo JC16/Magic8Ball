@@ -46,63 +46,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RelativeLayout layout_main = new RelativeLayout(this);
-        RelativeLayout layout_middle = new RelativeLayout(this);
-
         img_background = new ImageView(this);
         img_ball = new ImageView(this);
         txt_reply = new TextView(this);
         etxt_question = new EditText(this);
         btn_shake = new Button(this);
-
-        RelativeLayout.LayoutParams param_main = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        layout_main.setBackgroundResource(R.drawable.background);
-
-        RelativeLayout.LayoutParams param_img_ball = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        img_ball.setImageResource(R.drawable.circle1);
-        layout_middle.addView(img_ball, param_img_ball);
-
-        RelativeLayout.LayoutParams param_txt = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        param_txt.addRule(RelativeLayout.CENTER_VERTICAL);
-        param_txt.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        txt_reply.setText(R.string.reply);
-        layout_middle.addView(txt_reply, param_txt);
-
-        RelativeLayout.LayoutParams param_etxt = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        param_etxt.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        param_etxt.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        param_etxt.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        etxt_question.setHint(R.string.question);
-        etxt_question.setImeOptions(EditorInfo.IME_ACTION_GO);
-        etxt_question.setInputType(EditorInfo.TYPE_CLASS_TEXT);
-        layout_main.addView(etxt_question, param_etxt);
-
-        RelativeLayout.LayoutParams param_btn = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, 80);
-        param_btn.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        param_btn.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        param_btn.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        btn_shake.setText(R.string.shake);
-        btn_shake.setBackgroundResource(R.drawable.shakebutton);
-        layout_main.addView(btn_shake, param_btn);
-
-        RelativeLayout.LayoutParams param_middle = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        param_middle.addRule(RelativeLayout.ABOVE, btn_shake.getId());
-        param_middle.addRule(RelativeLayout.BELOW, etxt_question.getId());
-        layout_main.addView(layout_middle);
-
-        setContentView(layout_main, param_main);
-
-
-
-
-
-
 
         //System.out.print("Chen Yi Tai");
         Log.d("MainActivity", "Chen Yi Tai");
