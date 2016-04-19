@@ -44,7 +44,7 @@
     <Button
         android:layout_width="356dp"
         android:layout_height="45dp"
-        android:text="Shake"
+        android:text="History"
         android:id="@+id/shakeBtn"
         android:layout_alignParentBottom="true"
         android:background="@drawable/shakebutton"

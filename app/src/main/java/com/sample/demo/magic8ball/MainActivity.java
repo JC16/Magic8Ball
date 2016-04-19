@@ -1,5 +1,7 @@
 package com.sample.demo.magic8ball;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -32,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected AlphaAnimation fadeIn = new AlphaAnimation(0.2f , 1.0f ) ;
 
+    private ArrayList<QuestionResponseModel> qrArray;
 
     private final int[] photos = {R.drawable.circle1, R.drawable.circle2
             , R.drawable.circle3, R.drawable.circle4
@@ -85,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
 
         mymodel.debugprint();
 
+        ArrayList<QuestionResponseModel> loaded = loadQA();
+        if (loaded != null) {
+            this.qrArray = loaded;
+        } else {
+            this.qrArray = new ArrayList<QuestionResponseModel>();
+        }
+
 
         response = (TextView) findViewById(R.id.Response);
         question = (EditText) findViewById(R.id.questionText);
@@ -111,6 +125,12 @@ public class MainActivity extends AppCompatActivity {
 
                     circleView.setImageResource(photos[n]);
 
+                    QuestionResponseModel qa = new QuestionResponseModel(question.getText().toString(), response.getText().toString());
+                   //save question response
+                    qrArray.add(qa);
+                    saveQA(qrArray);
+
+
                     return true;
                 }
                 return false;
@@ -122,24 +142,42 @@ public class MainActivity extends AppCompatActivity {
             //@Override
             public void onClick(View view) {
 
-                Random rand = new Random();
-                int n = rand.nextInt(6);
-
-                fadeIn.setDuration(100);
-                fadeIn.setStartOffset(500);
-                fadeIn.setFillAfter(true);
-
-                response.startAnimation(fadeIn);
-                circleView.startAnimation(fadeIn);
-
-
-                response.setText(mymodel.response());
-
-                circleView.setImageResource(photos[n]);
+                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+                intent.putExtra("historyArray", qrArray);
+                startActivity(intent);
 
             }
         });
 
+    }
+
+    public ArrayList<QuestionResponseModel> loadQA(){
+        try {
+            FileInputStream fis = openFileInput("qrHistory.bin");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<QuestionResponseModel> o = (ArrayList<QuestionResponseModel>)ois.readObject();
+            return o;
+        } catch (Exception ex) {
+            //Log.v("Question Response History Load", ex.getMessage());
+            ex.printStackTrace();
+        }return null;
+
+
+    }
+        public void saveQA(ArrayList<QuestionResponseModel> qrArray) {
+        try {
+
+            String f = "qrHistory.bin";
+            //String string =
+            FileOutputStream fos = openFileOutput(f, Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos); //Select where you wish to save the file...
+            oos.writeObject(qrArray); // write the class as an 'object'
+            oos.flush(); // flush the stream to insure all of the information was written to 'qrHistory.bin'
+            oos.close();// close the stream
+        } catch (Exception ex) {
+            //Log.v("Question Response History Save", ex.getMessage());
+            ex.printStackTrace();
+        }
     }
 
 }
